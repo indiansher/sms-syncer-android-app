@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SMS Syncer</string>
+
+    <string name="input_auth_key">Auth Key</string>
+    <string name="input_target_fcm_token">Target FCM Token</string>
+    <string name="input_submit_btn">Submit Btn</string>
+    <string name="input_done_msg">Done</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">SMSes</string>
+    <string name="fcm_message">FCM Message</string>
+</resources>
