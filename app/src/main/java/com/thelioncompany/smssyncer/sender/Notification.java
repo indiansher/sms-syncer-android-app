@@ -1,4 +1,4 @@
-package com.thelioncompany.smssyncer.pnsender;
+package com.thelioncompany.smssyncer.sender;
 
 public class Notification {
     private String title;

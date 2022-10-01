@@ -1,4 +1,4 @@
-package com.thelioncompany.smssyncer;
+package com.thelioncompany.smssyncer.sender;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
 
-import com.thelioncompany.smssyncer.pnsender.FirebaseMessageSender;
-import com.thelioncompany.smssyncer.pnsender.Notification;
+import com.thelioncompany.smssyncer.sender.FirebaseMessageSender;
+import com.thelioncompany.smssyncer.sender.Notification;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.thelioncompany.smssyncer.pnreceiver;
+package com.thelioncompany.smssyncer.receiver;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

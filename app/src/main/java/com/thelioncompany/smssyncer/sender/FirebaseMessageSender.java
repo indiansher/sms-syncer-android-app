@@ -1,4 +1,4 @@
-package com.thelioncompany.smssyncer.pnsender;
+package com.thelioncompany.smssyncer.sender;
 
 import android.content.Context;
 import android.util.Log;

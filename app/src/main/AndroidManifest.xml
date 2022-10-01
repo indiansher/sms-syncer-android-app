@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".IncomingSmsListener"
+            android:name=".sender.IncomingSmsListener"
             android:permission="android.permission.RECEIVE_SMS">
             <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -33,7 +33,7 @@
         </receiver>
 
         <service
-            android:name=".pnreceiver.FirebaseMessageReceiver"
+            android:name=".receiver.FirebaseMessageReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
