@@ -7,6 +7,7 @@ import com.google.android.gms.common.util.Strings;
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.thelioncompany.smssyncer.data.SharedPrefRepository;
+import com.thelioncompany.smssyncer.util.Base64Util;
 
 import org.json.JSONObject;
 
@@ -32,7 +33,7 @@ public class FirebaseMessageSender {
     private final String targetFcmToken;
 
     public FirebaseMessageSender(Context context) {
-        this.targetFcmToken = SharedPrefRepository.getTargetFCMToken(context);
+        this.targetFcmToken = Base64Util.decodeBase64String(SharedPrefRepository.getTargetFCMToken(context));
         this.accessToken = generateAccessToken(context);
     }
 
@@ -49,7 +50,8 @@ public class FirebaseMessageSender {
         }
 
         try {
-            String serviceAccountJson = SharedPrefRepository.getServiceAccountJson(context);
+            String serviceAccountJson = Base64Util.decodeBase64String(
+                    SharedPrefRepository.getServiceAccountJson(context));
             InputStream stream = new ByteArrayInputStream(serviceAccountJson.getBytes(StandardCharsets.UTF_8));
             GoogleCredentials googleCredentials = GoogleCredentials
                     .fromStream(stream)
@@ -66,7 +68,7 @@ public class FirebaseMessageSender {
         return "";
     }
 
-    public void pushNoti(Notification noti, Context context) {
+    public void pushNoti(Notification noti) {
 
         JSONObject payload = new JSONObject();
         JSONObject message = new JSONObject();

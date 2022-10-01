@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
 
-import com.thelioncompany.smssyncer.sender.FirebaseMessageSender;
-import com.thelioncompany.smssyncer.sender.Notification;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -31,7 +28,7 @@ public class IncomingSmsListener extends BroadcastReceiver {
             public void run() {
                 FirebaseMessageSender sender = new FirebaseMessageSender(context);
                 for (Notification noti : notis) {
-                    sender.pushNoti(noti, context);
+                    sender.pushNoti(noti);
                 }
                 // finish processing
                 result.finish();

@@ -17,8 +17,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.common.util.Strings;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.thelioncompany.smssyncer.data.SharedPrefRepository;
+import com.thelioncompany.smssyncer.util.Base64Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView myFcmTokenText;
     private EditText targetFcmTokenText, serviceAccountJsonText;
     private Button submitBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void bindComponents() {
         // Layouts
-        introLayout = (LinearLayout) findViewById(R.id.intro_layout);
-        sender_title_layout = (LinearLayout) findViewById(R.id.title_sender_layout);
-        receiver_title_layout = (LinearLayout) findViewById(R.id.title_receiver_layout);
-        sender_config_layout = (ConstraintLayout) findViewById(R.id.sender_config_layout);
-        receiver_config_layout = (ConstraintLayout) findViewById(R.id.receiver_config_layout);
+        introLayout = findViewById(R.id.intro_layout);
+        sender_title_layout = findViewById(R.id.title_sender_layout);
+        receiver_title_layout = findViewById(R.id.title_receiver_layout);
+        sender_config_layout = findViewById(R.id.sender_config_layout);
+        receiver_config_layout = findViewById(R.id.receiver_config_layout);
 
         // Text Views
-        myFcmTokenText = (TextView) findViewById(R.id.my_fcm_token);
+        myFcmTokenText = findViewById(R.id.my_fcm_token);
 
         // Edit Texts
-        targetFcmTokenText = (EditText) findViewById(R.id.target_fcm_token);
-        serviceAccountJsonText = (EditText) findViewById(R.id.service_account_json);
+        targetFcmTokenText = findViewById(R.id.target_fcm_token);
+        serviceAccountJsonText = findViewById(R.id.service_account_json);
 
         // Button
-        submitBtn = (Button) findViewById(R.id.submit_btn);
+        submitBtn = findViewById(R.id.submit_btn);
     }
 
     private void bindListeners() {
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         receiver_title_layout.setOnClickListener(view -> loadReceiverConfigScreen());
         submitBtn.setOnClickListener(view -> saveSenderConfigData());
     }
-
 
     private void loadIntroScreen() {
         introLayout.setVisibility(View.VISIBLE);
@@ -100,13 +100,36 @@ public class MainActivity extends AppCompatActivity {
                     if (token == null) {
                         token = "";
                     }
+                    token = Base64Util.encodeStringToBase64(token);
                     myFcmTokenText.setText(token);
                 });
     }
 
     private void saveSenderConfigData() {
-        SharedPrefRepository.saveServiceAccountJson(getApplicationContext(), serviceAccountJsonText.getText().toString());
-        SharedPrefRepository.saveTargetFcmToken(getApplicationContext(), targetFcmTokenText.getText().toString());
+
+        String targetFcmTokenInput = targetFcmTokenText.getText().toString();
+        if (Strings.isEmptyOrWhitespace(targetFcmTokenInput)) {
+            Toast.makeText(getApplicationContext(), R.string.error_target_fcm_token_is_empty, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Base64Util.isInputBase64(targetFcmTokenInput)) {
+            Toast.makeText(getApplicationContext(), R.string.error_target_fcm_token_non_base64, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String serviceAccountJsonInput = serviceAccountJsonText.getText().toString();
+        if (Strings.isEmptyOrWhitespace(serviceAccountJsonInput)) {
+            Toast.makeText(getApplicationContext(), R.string.error_service_account_json_is_empty, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Base64Util.isInputBase64(serviceAccountJsonInput)) {
+            Toast.makeText(getApplicationContext(), R.string.error_service_account_json_non_base64, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPrefRepository.saveTargetFcmToken(getApplicationContext(), targetFcmTokenInput);
+        SharedPrefRepository.saveServiceAccountJson(getApplicationContext(), serviceAccountJsonInput);
+
         Toast.makeText(getApplicationContext(), R.string.input_done_msg, Toast.LENGTH_SHORT).show();
     }
 
