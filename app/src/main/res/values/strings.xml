@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SMS Syncer</string>
+
+    <string name="input_service_account_json">Enter Service Account JSON (base64 encoded)</string>
+    <string name="input_target_fcm_token">Enter Target FCM Token (base64 encoded)</string>
+    <string name="input_submit_btn">Submit</string>
+    <string name="input_done_msg">Save</string>
+    <string name="my_fcm_json">Your FCM Token (base64 encoded).(Please DO NOT make it public to all. Share this only
+    with the actual Sender.)</string>
+    <string name="error_service_account_json_is_empty">Error! Service Account JSON is empty.</string>
+    <string name="error_service_account_json_non_base64">Error! Service Account JSON is not base64 encoded.</string>
+    <string name="error_target_fcm_token_non_base64">Error! Target FCM token is not base64 encoded.</string>
+    <string name="error_target_fcm_token_is_empty">Error! Target FCM token is empty.</string>
+
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">SMSes</string>
+    <string name="fcm_message">FCM Message</string>
+
+    <string name="title_sender">Sender</string>
+    <string name="title_receiver">Receiver</string>
+
+</resources>
