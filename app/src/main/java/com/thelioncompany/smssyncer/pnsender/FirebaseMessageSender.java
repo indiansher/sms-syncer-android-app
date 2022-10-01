@@ -28,8 +28,8 @@ public class FirebaseMessageSender {
     private static final String MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
     private static final String[] SCOPES = {MESSAGING_SCOPE};
 
-    private String accessToken;
-    private String targetFcmToken;
+    private final String accessToken;
+    private final String targetFcmToken;
 
     public FirebaseMessageSender(Context context) {
         this.targetFcmToken = SharedPrefRepository.getTargetFCMToken(context);
