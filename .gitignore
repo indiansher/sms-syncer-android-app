@@ -104,3 +104,4 @@ local.properties
 
 # Private files
 app/google-services.json
+app/setup_instructions

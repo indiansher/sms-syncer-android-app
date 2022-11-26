@@ -102,7 +102,10 @@ public class FirebaseMessageSender {
 
             // Read FCM response status
             int status = conn.getResponseCode();
+            String responseMessage = conn.getResponseMessage();
             Log.d(TAG, "response status: " + status);
+            Log.d(TAG, "response: " + responseMessage);
+            conn.disconnect();
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
